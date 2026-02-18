@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@source "../components";
+@source "../app";
+
+a {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+a:hover, a:focus-visible {
+  color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --on-color: hsl(var(--foreground));
+    --card: hsl(222, 47%, 8%);
+    --primary: hsl(262, 83%, 65%);
+    --primary-light: hsl(262, 83%, 75%);
+    --secondary: hsl(192, 91%, 36%);
+    --muted: hsl(222, 47%, 12%);
+    --accent: hsl(222, 47%, 11%);
+    --destructive: hsl(0, 84%, 60%);
+    --border: hsl(222, 47%, 15%);
+    --border-strong: hsl(222, 47%, 20%);
+    --input: var(--accent);
+    --ring: var(--primary);
+    --radius: 1rem;
+    --secondary-text: hsl(215, 20%, 75%);
+    --muted-text: hsl(215, 20%, 65%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig"1, "calt"1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 60% 0%, hsl(var(--primary) / 0.2) 0%, transparent 70%);
+  }
+
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border-strong) !important;
+  }
 }
